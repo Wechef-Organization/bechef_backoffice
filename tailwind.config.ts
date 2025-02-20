@@ -22,6 +22,7 @@ export default {
 
         black: colors.black,
         white: colors.white,
+        border: "#D7D7D7",
 
         green0: "#3cb844",
         green1: "#1e9422",

@@ -16,7 +16,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 h-full max-h-screen flex flex-col items-center border-t-2 border-r-2 rounded-e-xl border-grey1 fixed">
+    <div className="w-64 h-full max-h-screen flex flex-col items-center border-t-2 border-r-2 rounded-e-xl border-border fixed">
       <div className="py-2 mb-3 mt-4">
         <Image
           src={"/sidebarLogo.svg"}

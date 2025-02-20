@@ -3,16 +3,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import InputText from "@/components/InputText";
 import InputPassword from "@/components/InputPassword";
-import Image from "next/image";
 import Button from "@/components/Button";
-
-interface LoginForm {
-  email?: string;
-  password?: string;
-};
+import LoginForm from "@/interfaces/login";
 
 const Login = () => {
   const router = useRouter();
@@ -28,7 +24,6 @@ const Login = () => {
     }
   });
 
-  // Função de envio do formulário
   const postLogin = (data: LoginForm) => {
     console.log("Dados enviados:", data);
     router.push("/dashboard");

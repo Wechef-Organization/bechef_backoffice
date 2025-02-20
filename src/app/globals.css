@@ -5,5 +5,141 @@
 
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  font-family: Poppins-Regular;
+}
+
+/* POPPINS FAMILY */
+@font-face {
+  font-family: Poppins-Light;
+  src: url("/fonts/Popins/Poppins-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("/fonts/Popins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-Medium;
+  src: url("/fonts/Popins/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url("/fonts/Popins/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("/fonts/Popins/Poppins-Bold.ttf") format("truetype");
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+}
+
+
+#inputCategories:focus {
+  outline: none;
+}
+
+#scrollableDiv::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* GLOBAL */
+
+.maxWidthSize {
+  max-width: 1000px;
+}
+
+
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #d7d7d7;
+  border-radius: 12px;
+  border: none;
+}
+
+.p-inputnumber-input {
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.inputnumber-invalid .p-inputnumber-input {
+  border: 1px solid red !important;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.p-inputwrapper-focus {
+  outline: none !important;
+}
+
+/* Para Chrome, Safari, Edge e Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.threePoints-oneLine {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; 
+}
+
+.threePoints-twoLine  {
+  display: -webkit-box;
+ -webkit-line-clamp: 2;
+ overflow: hidden;
+ -webkit-box-orient: vertical; 
+}
+
+.threePoints-threeLine  {
+  display: -webkit-box;
+ -webkit-line-clamp: 3;
+ overflow: hidden;
+ -webkit-box-orient: vertical; 
+}
+
+.custom-modal-dialog{
+  margin: 0 !important;
+  height: 100%;
+}
+.custom-modal-content{
+  height: 100%;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
 }

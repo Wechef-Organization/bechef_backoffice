@@ -14,7 +14,7 @@ const InputText = (props) => {
           <input
             className={`text-sm font-regularc w-full rounded-xl border bg-offWhite p-[10px]
             ${props.height ?? "h-12"}
-               ${props.error ? "border-red1 outline-red1" : "border-grey3 outline-grey1"}
+               ${props.error ? "border-red1 outline-red1" : "border-border outline-grey1"}
         `}
             id={field.name}
             value={field.value}
