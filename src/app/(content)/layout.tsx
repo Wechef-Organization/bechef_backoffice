@@ -1,4 +1,6 @@
-import "./globals.css";
+
+import Sidebar from "@/components/Sidebar";
+import "../globals.css";
 
 export default function RootLayout({
   children,
@@ -10,7 +12,11 @@ export default function RootLayout({
       <body
         className={`antialiased `}
       >
-        {children}
+        <Sidebar />
+        <div className="pl-64">
+
+          {children}
+        </div>
       </body>
     </html>
   );

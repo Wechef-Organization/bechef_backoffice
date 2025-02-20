@@ -1,5 +1,5 @@
 const Accesses = () => {
-  return(
+  return (
     <div>
       <h1>Accesses</h1>
     </div>

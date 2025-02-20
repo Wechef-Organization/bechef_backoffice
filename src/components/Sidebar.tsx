@@ -27,28 +27,26 @@ const Sidebar = () => {
       </div>
 
       <nav className="w-full px-3 space-y-2 flex flex-col items-start mb-9 overflow-y-auto">
-        <Link href={"/"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "/"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+        <Link href={"/dashboard"}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/dashboard"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
+
         >
           <DashboardIcon
-            className={pathname == "/" ? "text-primarycolor" : "text-grey4"}
+            className={pathname == "/dashboard" ? "text-primarycolor" : "text-grey4"}
           />
           <span className="hidden lg:inline flex-shrink text-[13px]">
             Dashboard
           </span>
         </Link>
         <Link href={"/requests"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "/requests"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/requests"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
+
         >
           <RequestsIcon
             className={
@@ -60,12 +58,11 @@ const Sidebar = () => {
           </span>
         </Link>
         <Link href={"/products"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "/products"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/products"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
+
         >
           <ProductsIcon
             className={
@@ -77,12 +74,11 @@ const Sidebar = () => {
           </span>
         </Link>
         <Link href={"/users"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "/users"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/users"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
+
         >
           <UsersIcon
             className={
@@ -94,12 +90,11 @@ const Sidebar = () => {
           </span>
         </Link>
         <Link href={"/accesses"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "/accesses"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/accesses"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
+
         >
           <AccessesIcon
             className={
@@ -111,12 +106,10 @@ const Sidebar = () => {
           </span>
         </Link>
         <Link href={"/config"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "/config"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/config"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
         >
           <ConfigIcon
             className={
@@ -129,13 +122,13 @@ const Sidebar = () => {
         </Link>
       </nav>
       <div className="w-full px-3 mt-auto mb-4">
-        <button
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${
-            pathname == "requests"
-              ? "bg-secondarycolor text-primarycolor"
-              : "bg-white hover:bg-opacity-80 text-grey4"
-          }`}
-          // onClick={() => navigate(path)}
+        <Link
+          href={"/"}
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "requests"
+            ? "bg-secondarycolor text-primarycolor"
+            : "bg-white hover:bg-opacity-80 text-grey4"
+            }`}
+
         >
           <ExitIcon
             className={
@@ -143,7 +136,7 @@ const Sidebar = () => {
             }
           />
           <span className="hidden lg:inline flex-shrink text-[13px]">Sair</span>
-        </button>
+        </Link>
       </div>
     </div>
   );
