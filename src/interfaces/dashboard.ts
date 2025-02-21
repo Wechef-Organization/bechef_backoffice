@@ -10,4 +10,5 @@ export interface MetricCardProps {
 export interface InputSearchProps {
     value: string;
     setValue: Dispatch<SetStateAction<string>>;
+    width?: string
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import Influencers from "./components/Influencers";
 import MetricCard from "./components/MetricCard";
 import Ranking from "./components/Ranking";
 
@@ -18,7 +19,7 @@ const Dashboard = () => {
         </div>
         <div className="w-full flex flex-row items-center justify-between ">
           <Ranking />
-          <Ranking />
+          <Influencers />
         </div>
       </div>
     </div>

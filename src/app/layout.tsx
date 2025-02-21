@@ -1,3 +1,6 @@
+"use client"
+
+import GlobalProvider from "@/context/GlobalContext";
 import "./globals.css";
 
 export default function RootLayout({
@@ -10,7 +13,10 @@ export default function RootLayout({
       <body
         className={`antialiased `}
       >
-        {children}
+        <GlobalProvider>
+
+          {children}
+        </GlobalProvider>
       </body>
     </html>
   );

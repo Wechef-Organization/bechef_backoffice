@@ -35,15 +35,15 @@ const InputPassword = (props) => {
             >
               {seePassword ? (
                 <Image
-                  src={"/Login/EyeOpen.svg"}
-                  alt="Sidebar logo"
+                  src={"/images/Login/EyeOpen.svg"}
+                  alt="Olho aberto"
                   width={26}
                   height={22}
                 />
               ) : (
                 <Image
-                  src={"/Login/EyeClose.svg"}
-                  alt="Sidebar logo"
+                  src={"/images/Login/EyeClose.svg"}
+                  alt="Olho fechado"
                   width={26}
                   height={22}
                 />

@@ -44,7 +44,6 @@ const Login = () => {
         <h1 className="font-mediumc my-[40px] text-primarycolor text-2xl">
           Dados de acesso
         </h1>
-
         <form
           onSubmit={handleSubmit(postLogin)}
           className="flex flex-col items-center w-full gap-5"
@@ -63,7 +62,6 @@ const Login = () => {
             }}
             error={errors.email}
           />
-
           <InputPassword
             label="Senha"
             name="password"
@@ -78,7 +76,6 @@ const Login = () => {
             }}
             error={errors.password}
           />
-
           <div className="w-full pt-[10px]">
             <Button
               name="Entrar"
