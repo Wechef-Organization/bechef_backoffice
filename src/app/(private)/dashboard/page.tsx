@@ -1,9 +1,10 @@
 "use client";
 
-import metricsBilling from "@/mock/Dashboard/metricsBilling"
-import MetricCard from "./components/MetricCard";
 import Header from "@/components/Header";
+import MetricCard from "./components/MetricCard";
 import Ranking from "./components/Ranking";
+
+import metricsBilling from "@/mock/Dashboard/metricsBilling";
 
 const Dashboard = () => {
   return (

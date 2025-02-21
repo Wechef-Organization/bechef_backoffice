@@ -3,13 +3,13 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import DashboardIcon from "@/images/svg/Sidebar/dashboard.svg";
-import RequestsIcon from "@/images/svg/Sidebar/requests.svg";
-import ProductsIcon from "@/images/svg/Sidebar/products.svg";
-import UsersIcon from "@/images/svg/Sidebar/users.svg";
 import AccessesIcon from "@/images/svg/Sidebar/accesses.svg";
 import ConfigIcon from "@/images/svg/Sidebar/config.svg";
+import DashboardIcon from "@/images/svg/Sidebar/dashboard.svg";
 import ExitIcon from "@/images/svg/Sidebar/exit.svg";
+import ProductsIcon from "@/images/svg/Sidebar/products.svg";
+import RequestsIcon from "@/images/svg/Sidebar/requests.svg";
+import UsersIcon from "@/images/svg/Sidebar/users.svg";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -19,8 +19,8 @@ const Sidebar = () => {
     <div className="w-64 h-full max-h-screen flex flex-col items-center border-t-2 border-r-2 rounded-e-xl border-border fixed">
       <div className="py-2 mb-3 mt-4">
         <Image
-          src={"/sidebarLogo.svg"}
-          alt="Sidebar logo"
+          src={"/logo.svg"}
+          alt="Logo Bechef"
           width={148}
           height={50}
         />

@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
-import InputText from "@/components/InputText";
-import InputPassword from "@/components/InputPassword";
 import Button from "@/components/Button";
+import InputPassword from "@/components/InputPassword";
+import InputText from "@/components/InputText";
 import LoginForm from "@/interfaces/login";
 
 const Login = () => {
@@ -36,8 +35,8 @@ const Login = () => {
       <div className="w-[418px]">
         <div className=" w-full flex justify-start items-center">
           <Image
-            src={"/sidebarLogo.svg"}
-            alt="Sidebar logo"
+            src={"/logo.svg"}
+            alt="Logo Bechef"
             width={177}
             height={60}
           />
