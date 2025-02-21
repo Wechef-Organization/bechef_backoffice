@@ -1,7 +1,12 @@
+import Header from "@/components/Header"
+
 const Config = () => {
-  return(
-    <div>
-      <h1>Config</h1>
+  return (
+    <div className="w-full px-[60px] pb-11 flex flex-col gap-11">
+      <Header title="Configurações" name="Mateus barbosa" />
+      <div className="flex flex-col gap-6 pt-32">
+
+      </div>
     </div>
   )
 }

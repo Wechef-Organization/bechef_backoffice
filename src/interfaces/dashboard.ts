@@ -11,4 +11,5 @@ export interface InputSearchProps {
     value: string;
     setValue: Dispatch<SetStateAction<string>>;
     width?: string
+    heigth?: string
 };
