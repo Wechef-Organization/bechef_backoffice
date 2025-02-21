@@ -4,7 +4,7 @@ import UserImage from "./UserImage"
 
 const Header: React.FC<HeaderProps> = ({ title, name }) => {
     return (
-        <header className="w-full flex flex-row items-center justify-between">
+        <header style={{ width: "calc(100% - 376px)" }} className=" h-32 flex flex-row items-center justify-between bg-white z-50 fixed ">
             <h1 className="text-3xl font-semibold text-primarycolor">{title}</h1>
             <div className="w-56 h-12 p-1 border border-border rounded-full flex flex-row items-center justify-between">
                 <UserImage url={"/mock/users/user.svg"} />

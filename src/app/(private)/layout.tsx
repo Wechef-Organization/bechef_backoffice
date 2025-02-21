@@ -14,7 +14,6 @@ export default function RootLayout({
       >
         <Sidebar />
         <div className="pl-64">
-
           {children}
         </div>
       </body>
