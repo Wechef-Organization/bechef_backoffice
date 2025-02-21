@@ -1,5 +1,5 @@
-import React from "react";
 import Image from "next/image";
+import React from "react";
 
 import { MetricCardProps } from "@/interfaces/dashboard";
 
@@ -12,7 +12,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   const isPositive = percentage >= 0;
 
   return (
-    <li className="border border-border rounded-lg p-4 shadow-sm min-w-[222px] w-[232px]">
+    <li className="border border-border rounded-lg p-4 shadow-sm w-[25%]">
       <Image
         className="mb-4"
         src={`/images/Dashboard/metricIcon${icon}.svg`}
