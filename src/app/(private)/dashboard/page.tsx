@@ -6,6 +6,8 @@ import MetricCard from "./components/MetricCard";
 import Ranking from "./components/Ranking";
 
 import metricsBilling from "@/mock/Dashboard/metricsBilling";
+import Clients from "./components/Clients";
+import Recipies from "./components/Recipies";
 
 const Dashboard = () => {
   return (
@@ -20,6 +22,10 @@ const Dashboard = () => {
         <div className="w-full flex flex-row items-center justify-between ">
           <Ranking />
           <Influencers />
+        </div>
+        <div className="w-full flex flex-row items-center justify-between ">
+          <Recipies />
+          <Clients />
         </div>
       </div>
     </div>

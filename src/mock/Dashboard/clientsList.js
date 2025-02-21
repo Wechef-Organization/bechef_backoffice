@@ -1,0 +1,60 @@
+const clientsList = [
+  {
+    id: 1,
+    image: "mock/clients/client1.svg",
+    name: "Marcela perreira santos",
+    CPF: "cheffotto",
+    sales_number: 1000,
+    total: 100000,
+  },
+  {
+    id: 2,
+    image: "mock/clients/client2.svg",
+    name: "Alan silva perreia",
+    CPF: "cheffotto",
+    sales_number: 2000,
+    total: 200000,
+  },
+  {
+    id: 3,
+    image: "mock/clients/client3.svg",
+    name: "Matheus silva dos santos",
+    CPF: "cheffotto",
+    sales_number: 3000,
+    total: 300000,
+  },
+  {
+    id: 4,
+    image: "mock/clients/client4.svg",
+    name: "Ana perreira lira",
+    CPF: "cheffotto",
+    sales_number: 4000,
+    total: 400000,
+  },
+  {
+    id: 5,
+    image: "mock/clients/client5.svg",
+    name: "Ana barbosa silva",
+    CPF: "cheffotto",
+    sales_number: 5000,
+    total: 500000,
+  },
+  {
+    id: 6,
+    image: "mock/clients/client6.svg",
+    name: "Hugo barbosa costa",
+    CPF: "cheffotto",
+    sales_number: 6000,
+    total: 600000,
+  },
+  {
+    id: 7,
+    image: "mock/clients/client7.svg",
+    name: "João costa silva",
+    CPF: "cheffotto",
+    sales_number: 7000,
+    total: 700000,
+  },
+];
+
+export default clientsList;

@@ -1,18 +1,22 @@
 import { createContext, useContext, useState } from "react";
 
-import { DashboardContextType, DashboardProviderProps, Influencer, RankingItem } from "@/interfaces/dashboardContext";
+import { ClientItem, DashboardContextType, DashboardProviderProps, Influencer, RankingItem, RecipieItem } from "@/interfaces/dashboardContext";
 
 export const DashboardContext = createContext<DashboardContextType | null>(null);
 
 export const DashboardProvider = ({ children }: DashboardProviderProps) => {
   const [ranckingList, setRanckingList] = useState<RankingItem[]>([]);
   const [influencersList, setInfluencersList] = useState<Influencer[]>([]);
+  const [recipiesList, setRecipiesList] = useState<RecipieItem[]>([]);
+  const [clientsList, setClientsList] = useState<ClientItem[]>([]);
 
   return (
     <DashboardContext.Provider
       value={{
         ranckingList, setRanckingList,
         influencersList, setInfluencersList,
+        recipiesList, setRecipiesList,
+        clientsList, setClientsList
       }}
     >
       {children}
