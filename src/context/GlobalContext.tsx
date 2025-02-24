@@ -2,13 +2,18 @@ import { createContext } from "react";
 
 import { GlobalContextType, GlobalProviderProps } from "@/interfaces/globalContext";
 import { DashboardProvider } from "./DashboardContext";
+import { RequestsProvider } from "./RequestsContext";
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
 function GlobalProvider({ children }: GlobalProviderProps) {
   return (
     <GlobalContext.Provider value={{}}>
-      <DashboardProvider>{children}</DashboardProvider>
+      <DashboardProvider>
+        <RequestsProvider>
+          {children}
+        </RequestsProvider>
+      </DashboardProvider>
     </GlobalContext.Provider>
   );
 }

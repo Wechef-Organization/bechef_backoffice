@@ -2,11 +2,11 @@
 "use client"
 
 import Image from "next/image";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import InputSearch from "@/components/InputSearch";
 import Select from "@/components/Select";
+import { useRequests } from "@/context/RequestsContext";
 import optionsSelect from "@/mock/Requests/optionsSelect";
 
 const FilterHeader = () => {
@@ -20,7 +20,7 @@ const FilterHeader = () => {
         }
     });
 
-    const [value, seValue] = useState("")
+    const { searchValue, setSearchValue, setFilterIsOpen } = useRequests()
 
     const onSubmit = (data: any) => {
         console.log("Valor selecionado:", data.select);
@@ -42,8 +42,14 @@ const FilterHeader = () => {
                     required: "Campo obrigatório!",
                 }}
             />
-            <InputSearch width="w-80" heigth="h-11" value={value} setValue={seValue} />
-            <Image src={"/images/Global/filter.svg"} alt="Icone de filtro" width={45} height={45} />
+            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} />
+            <Image
+                src={"/images/Global/filter.svg"}
+                alt="Icone de filtro"
+                width={45} height={45}
+                onClick={() => { setFilterIsOpen(true) }}
+                className="cursor-pointer"
+            />
         </div>
     )
 }

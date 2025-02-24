@@ -15,7 +15,6 @@ const Select: React.FC<SelectProps> = ({
     width,
     handleSubmit,
     onSubmit,
-    defaultValue = "",
     optionKey,
     optionValue,
     notMargin,
@@ -41,14 +40,13 @@ const Select: React.FC<SelectProps> = ({
                     render={({ field }) => (
                         <select
                             className={`${selectStyle} text-sm font-regularc p-2 w-full ${height || "h-11"}  
-                            rounded-[10px] bg-white border border-${error?.message ? "red1" : "border"} `}
+                            rounded-[10px] bg-white border border-${error?.root?.message ? "red1" : "border"} cursor-pointer`}
                             id={field.name}
                             value={field.value}
                             onChange={(value) => {
                                 field.onChange(value);
-                                handleSubmit(onSubmit)();
+                                handleSubmit && onSubmit && handleSubmit(onSubmit)();
                             }}
-                            defaultValue={defaultValue}
                             required={required}
                             {...rest}>
                             <option
@@ -70,9 +68,9 @@ const Select: React.FC<SelectProps> = ({
                     )}
                 />
 
-                {error?.message && (
+                {error?.root?.message && (
                     <p className="min-h-5 mt-1 text-xs font-semiboldc text-red1">
-                        {error?.message}
+                        {error?.root?.message}
                     </p>
                 )}
             </div>
