@@ -1,26 +1,28 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 
 import Button from "@/components/Button";
 import Select from "@/components/Select";
-import { useRequests } from "@/context/RequestsContext";
+import { useProducts } from "@/context/ProductsContext";
 
 const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
+    reset
   } = useForm({
     defaultValues: {
-      select: "",
+      select_profit: "",
+      select_category: "",
+      select_status: "",
     }
   });
 
-  const { setDateFilter, setStatusFilter } = useRequests()
-  const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
+  const { setProfitFilter, setCategoryFilter, setStatusFilter } = useProducts()
 
 
   const optionsSelect = [
@@ -34,28 +36,53 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
     },
   ];
 
+  const optionsCategory = [
+    {
+      value: "Proteína",
+      name: "Proteína",
+    },
+    {
+      value: "Massas",
+      name: "Massas",
+    },
+  ];
+
+  const optionsStatus = [
+    {
+      value: "true",
+      name: "Ligado",
+    },
+    {
+      value: "false",
+      name: "Desligado",
+    },
+  ];
+
+
   const clearFilter = () => {
-    setDateFilter([null, null])
-    setDate([null, null])
+    setProfitFilter("")
+    setCategoryFilter("")
     setStatusFilter("")
+    reset()
     setIsOpen(false)
   }
 
-  const onSubmit = (data: { select: string }) => {
-    if (data.select != "") {
-      setStatusFilter(data.select)
+  const onSubmit = (data: {
+    select_profit: string,
+    select_category: string,
+    select_status: string,
+  }) => {
+    if (data.select_profit != "") {
+      setProfitFilter(data.select_profit)
     }
-    if (date[0] && date[1]) {
-      setDateFilter(date);
+    if (data.select_category != "") {
+      setCategoryFilter(data.select_category)
+    }
+    if (data.select_status != "") {
+      setStatusFilter(data.select_status)
     }
 
     setIsOpen(false)
-  }
-
-  const onChangeData = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setDate([start, end]);
-
   }
 
   useEffect(() => {
@@ -86,7 +113,7 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             width="w-full"
             selectStyle="rounded-lg"
             label="Lucro por venda"
-            name="select"
+            name="select_profit"
             options={optionsSelect}
             control={control}
             error={errors}
@@ -96,8 +123,8 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             width="w-full"
             selectStyle="rounded-lg"
             label="Categoria"
-            name="select"
-            options={optionsSelect}
+            name="select_category"
+            options={optionsCategory}
             control={control}
             error={errors}
             notMargin
@@ -106,8 +133,8 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             width="w-full"
             selectStyle="rounded-lg"
             label="Status"
-            name="select"
-            options={optionsSelect}
+            name="select_status"
+            options={optionsStatus}
             control={control}
             error={errors}
             notMargin

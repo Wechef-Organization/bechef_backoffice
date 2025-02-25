@@ -32,7 +32,6 @@ const Requests = () => {
     return matchesSearch && matchesDate && matchesStatus;
   });
 
-
   return (
     <div className="w-full px-[60px] pb-11 flex flex-col gap-11">
       <Header title="Pedidos" name="Mateus barbosa" />

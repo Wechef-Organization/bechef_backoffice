@@ -1,15 +1,20 @@
 import { ReactNode } from "react";
-import { Coupon } from "./products";
+import { Coupon, Product } from "./products";
 
 export interface ProductsContextType {
     searchValue: string;
     setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-    dateFilter: [Date | null, Date | null];
-    setDateFilter: React.Dispatch<React.SetStateAction<[Date | null, Date | null]>>;
+    profitFilter: string;
+    setProfitFilter: React.Dispatch<React.SetStateAction<string>>;
+    categoryFilter: string;
+    setCategoryFilter: React.Dispatch<React.SetStateAction<string>>;
     statusFilter: string;
     setStatusFilter: React.Dispatch<React.SetStateAction<string>>;
+
     couponList: Coupon[];
     setCouponList: React.Dispatch<React.SetStateAction<Coupon[]>>;
+    productsList: Product[];
+    setProductsList: React.Dispatch<React.SetStateAction<Product[]>>;
 
     filterIsOpen: boolean;
     setFilterIsOpen: React.Dispatch<React.SetStateAction<boolean>>;

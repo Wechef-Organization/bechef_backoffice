@@ -1,15 +1,18 @@
 import { createContext, useContext, useState } from "react";
 
-import { Coupon } from "@/interfaces/products";
+import { Coupon, Product } from "@/interfaces/products";
 import { ProductsContextType, ProductsProviderProps } from "@/interfaces/productsContext ";
 
 export const ProductsContext = createContext<ProductsContextType | null>(null);
 
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [dateFilter, setDateFilter] = useState<[Date | null, Date | null]>([null, null]);
+  const [profitFilter, setProfitFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("");
+
   const [couponList, setCouponList] = useState<Coupon[]>([])
+  const [productsList, setProductsList] = useState<Product[]>([])
 
   const [filterIsOpen, setFilterIsOpen] = useState<boolean>(false);
   const [couponIsOpen, setCouponIsOpen] = useState<boolean>(false);
@@ -18,9 +21,12 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     <ProductsContext.Provider
       value={{
         searchValue, setSearchValue,
-        dateFilter, setDateFilter,
+        profitFilter, setProfitFilter,
+        categoryFilter, setCategoryFilter,
         statusFilter, setStatusFilter,
+
         couponList, setCouponList,
+        productsList, setProductsList,
 
         filterIsOpen, setFilterIsOpen,
         couponIsOpen, setCouponIsOpen
