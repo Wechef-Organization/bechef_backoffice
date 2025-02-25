@@ -41,7 +41,7 @@ const Products = () => {
       ? item.status === (statusFilter === "true")
       : true;
 
-    return matchesProfit && matchesCategory && matchesStatus;
+    return matchesSearch && matchesProfit && matchesCategory && matchesStatus;
   });
 
   return (

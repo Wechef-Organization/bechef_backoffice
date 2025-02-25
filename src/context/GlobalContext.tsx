@@ -4,6 +4,7 @@ import { GlobalContextType, GlobalProviderProps } from "@/interfaces/globalConte
 import { DashboardProvider } from "./DashboardContext";
 import { ProductsProvider } from "./ProductsContext";
 import { RequestsProvider } from "./RequestsContext";
+import { UsersProvider } from "./UsersContext";
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
@@ -13,7 +14,9 @@ function GlobalProvider({ children }: GlobalProviderProps) {
       <DashboardProvider>
         <RequestsProvider>
           <ProductsProvider>
-            {children}
+            <UsersProvider>
+              {children}
+            </UsersProvider>
           </ProductsProvider>
         </RequestsProvider>
       </DashboardProvider>

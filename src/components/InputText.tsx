@@ -13,7 +13,7 @@ const InputText: React.FC<InputTextProps> = ({ label, name, control, rules, widt
         rules={rules}
         render={({ field }) => (
           <input
-            className={`text-sm font-regularc w-full rounded-xl border bg-offWhite p-[10px]
+            className={`text-sm font-regularc w-full rounded-xl border bg-offWhite p-[10px] ${disabled && "bg-[#F5F5F5]"}
             ${height ?? "h-12"}
                ${error ? "border-red1 outline-red1" : "border-border outline-grey1"}
         `}

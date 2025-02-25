@@ -74,7 +74,7 @@ const Sidebar = () => {
           </span>
         </Link>
         <Link href={"/users"}
-          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/users"
+          className={`h-11 flex items-center gap-3 rounded px-2 py-1 w-full transition-colors ${pathname == "/users" || pathname == "/users/approvals"
             ? "bg-secondarycolor text-primarycolor"
             : "bg-white hover:bg-opacity-80 text-grey4"
             }`}
@@ -82,7 +82,7 @@ const Sidebar = () => {
         >
           <UsersIcon
             className={
-              pathname == "/users" ? "text-primarycolor" : "text-grey4"
+              pathname == "/users" || pathname == "/users/approvals" ? "text-primarycolor" : "text-grey4"
             }
           />
           <span className="hidden lg:inline flex-shrink text-[13px]">
