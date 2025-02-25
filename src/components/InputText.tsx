@@ -1,9 +1,9 @@
 import { InputTextProps } from "@/interfaces/inputText";
 import { Controller } from "react-hook-form";
 
-const InputText: React.FC<InputTextProps> = ({ label, name, control, rules, height, error, placeHolder, disabled, type, }) => {
+const InputText: React.FC<InputTextProps> = ({ label, name, control, rules, width, height, error, placeHolder, disabled, type, }) => {
   return (
-    <div className="flex flex-col items-start w-full">
+    <div className={`flex flex-col items-start ${width || "w-full"}`}>
       <label className="mb-2 font-mediumc text-[15px] w-full text-sm">
         {label}
       </label>

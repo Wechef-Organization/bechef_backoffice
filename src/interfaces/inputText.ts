@@ -6,6 +6,7 @@ export interface InputTextProps {
     name: string;
     control: Control<any>;
     rules?: Omit<RegisterOptions<FieldValues, string>, "disabled" | "valueAsNumber" | "valueAsDate" | "setValueAs"> | undefined;
+    width?: string | undefined;
     height?: string | undefined;
     error?: FieldError;
     placeHolder: string;
