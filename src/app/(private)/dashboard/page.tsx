@@ -11,7 +11,7 @@ import Recipies from "./components/Recipies";
 
 const Dashboard = () => {
   return (
-    <div className="w-full px-[60px] pb-11 flex flex-col gap-11">
+    <div className="w-full px-[60px] pb-11 flex flex-col gap-9">
       <Header title="Dashboard" name="Mateus barbosa" />
       <div className="flex flex-col gap-6 pt-32">
         <div className="flex flex-row items-center gap-6">

@@ -5,11 +5,11 @@ import { Controller } from "react-hook-form";
 import { InputPassProps } from "@/interfaces/inputPass";
 
 
-const InputPassword: React.FC<InputPassProps> = ({ label, name, control, rules, height, error, placeHolder, disabled, type, }) => {
+const InputPassword: React.FC<InputPassProps> = ({ label, name, control, rules, width, height, error, placeHolder, disabled, type, }) => {
   const [seePassword, setseePassword] = useState(true);
 
   return (
-    <div className="flex flex-col items-start w-full">
+    <div className={`flex flex-col items-start ${width || "w-full"}`}>
       <label className="mb-2 font-mediumc text-[15px] w-full text-sm">
         {label}
       </label>

@@ -68,7 +68,7 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
       isOpen={isOpen}
       onRequestClose={() => { setIsOpen(false) }}
       overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-      className="relative w-full max-w-lg p-6 bg-white rounded-lg shadow-lg outline-none"
+      className="relative w-full max-w-lg p-6 bg-white rounded-[20px] shadow-lg outline-none"
     >
       <div>
         <div className="w-full flex items-center justify-between border-b border-border pb-3">

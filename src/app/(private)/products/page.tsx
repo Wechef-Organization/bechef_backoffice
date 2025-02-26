@@ -45,9 +45,9 @@ const Products = () => {
   });
 
   return (
-    <div className="w-full px-[60px] pb-11 flex flex-col gap-11">
+    <div className="w-full px-[60px] pb-11 flex flex-col gap-9">
       <Header title="Produtos" name="Mateus barbosa" />
-      <div className="flex flex-col gap-6 pt-32">
+      <div className="pt-32">
         <FilterHeader />
       </div>
       <div className="flex flex-col gap-4">
