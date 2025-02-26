@@ -6,7 +6,7 @@ const UserCard = ({ user, setUserSelected, setActionsIsOpen }: { user: User, set
         <div className="w-full h-14 border border-border rounded-xl flex items-center p-5">
             <div className="w-[10%] flex items-center justify-between pr-4">
                 <Image alt="Caixa de seleção" src={"/images/Global/checkBoxOff.svg"} width={15} height={15} />
-                <Image alt="Usuário" src={user.image} width={35} height={35} />
+                <Image alt="Usuário" src={user.image} width={35} height={35} className="rounded-full" />
             </div>
             <div className="w-[30%]">
                 <p className="text-sm font-medium">{user.name}</p>

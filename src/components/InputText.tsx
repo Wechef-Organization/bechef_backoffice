@@ -19,7 +19,7 @@ const InputText: FC<InputTextProps> = ({ label, name, control, rules, width, hei
                ${error ? "border-red1 outline-red1" : "border-border outline-grey1"}
         `}
             id={field.name}
-            value={field.value}
+            value={field.value ?? ""}
             onChange={field.onChange}
             placeholder={placeHolder}
             disabled={disabled}

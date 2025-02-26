@@ -165,7 +165,6 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
           />
           <InputChips
             width="w-[48%]"
-            height="h-[120px]"
             label="Permissão"
             name="permissions"
             control={control}

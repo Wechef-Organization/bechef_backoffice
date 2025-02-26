@@ -2,6 +2,7 @@ import { createContext } from "react";
 
 import { GlobalContextType, GlobalProviderProps } from "@/interfaces/globalContext";
 import { AccessesProvider } from "./AccessesContext";
+import { ConfigProvider } from "./ConfigContext";
 import { DashboardProvider } from "./DashboardContext";
 import { ProductsProvider } from "./ProductsContext";
 import { RequestsProvider } from "./RequestsContext";
@@ -17,7 +18,9 @@ function GlobalProvider({ children }: GlobalProviderProps) {
           <ProductsProvider>
             <UsersProvider>
               <AccessesProvider>
-                {children}
+                <ConfigProvider>
+                  {children}
+                </ConfigProvider>
               </AccessesProvider>
             </UsersProvider>
           </ProductsProvider>

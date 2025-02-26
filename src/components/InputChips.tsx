@@ -27,7 +27,7 @@ const InputChips: FC<InputChipsProps> = ({ label, control, rules, disabled, name
                 rules={rules}
                 render={({ field }) => (
                     <Chips
-                        className={`w-full rounded-xl border bg-offWhite p-[10px] text-sm flex items-start
+                        className={`w-full rounded-xl border bg-offWhite p-[10px] text-sm flex items-start overflow-y-auto
                                 ${disabled && "bg-[#F5F5F5]"}
                                 ${height ?? "h-12"}
                                 ${error ? "border-red1 outline-red1" : "border-border outline-grey1"}
