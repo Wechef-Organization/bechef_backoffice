@@ -17,15 +17,15 @@ const NutriCard = ({ nutri }: { nutri: Nutri }) => {
                 <div className="w-[55%] flex items-center justify-between">
                     <div className="flex flex-col items-center">
                         <p className="text-[13px] font-medium text-center">{nutri.date}</p>
-                        <span className="text-[10px] font-medium text-grey7 text-center">Categoria</span>
+                        <span className="text-[10px] font-medium text-grey7 text-center">Data de cadastro</span>
                     </div>
                     <div className="flex flex-col items-center">
                         <p className="text-[13px] font-medium text-center">{nutri.email}</p>
-                        <span className="text-[10px] font-medium text-grey7 text-center">Estoque</span>
+                        <span className="text-[10px] font-medium text-grey7 text-center">E-mail</span>
                     </div>
                     <div className="flex flex-col items-center">
                         <p className="text-[13px] font-medium text-center">{nutri.number}</p>
-                        <span className="text-[10px] font-medium text-grey7 text-center">Preço</span>
+                        <span className="text-[10px] font-medium text-grey7 text-center">WhatsApp</span>
                     </div>
 
                 </div>

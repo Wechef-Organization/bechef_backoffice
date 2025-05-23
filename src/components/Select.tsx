@@ -28,7 +28,7 @@ const Select: React.FC<SelectProps> = ({
                     }`}>
                 {label && (
                     <label
-                        className={`${LabelStyle} text-sm mb-2 font-mediump text-font `}>
+                        className={`${LabelStyle} text-sm mb-2 font-medium text-font`}>
                         {label}
                     </label>
                 )}
@@ -39,7 +39,7 @@ const Select: React.FC<SelectProps> = ({
                     rules={rules}
                     render={({ field }) => (
                         <select
-                            className={`${selectStyle} text-sm font-regularc p-2 w-full ${height || "h-11"}  
+                            className={`${selectStyle} text-sm ${field.value == "" && "text-[#495057]"}  font-regularc p-2 w-full ${height || "h-11"}  
                             rounded-[10px] bg-white border border-${error?.root?.message ? "red1" : "border"} cursor-pointer`}
                             id={field.name}
                             value={field.value}
