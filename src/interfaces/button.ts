@@ -11,4 +11,5 @@ export interface ButtonProps {
     form?: string | undefined;
     style?: CSSProperties | undefined;
     name?: string
+    isLoading?: boolean
 };

@@ -8,6 +8,12 @@ import Button from "@/components/Button";
 import InputPassword from "@/components/InputPassword";
 import InputText from "@/components/InputText";
 import LoginForm from "@/interfaces/login";
+import secureLocalStorage from "react-secure-storage";
+import { useEffect, useState } from "react";
+import { sendToast } from "@/utils/toasts";
+import { autoLogin } from "../../services/autoLogin";
+import { login } from "../../services/login";
+import { LottieAnimations } from "@/components/LottieAnimations";
 
 const Login = () => {
   const router = useRouter();
@@ -23,12 +29,40 @@ const Login = () => {
     }
   });
 
-  const postLogin = (data: LoginForm) => {
-    console.log("Dados enviados:", data);
-    router.push("/dashboard");
-  };
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+  const token = secureLocalStorage.getItem('@ADMINTOKEN');
+
+  const postLogin = async (data: LoginForm) => {
+    const { email, password } = data
+
+    await login({ email, password, setIsLoading })
+  };
+
+  const handleAutoLogin = async () => {
+    try {
+      setIsLoading(true);
+      const { permissions } = await autoLogin();
+      if (permissions.length < 1) {
+        sendToast('error', 'Seu usuário não tem permissão para acessar a plataforma.');
+      } else {
+        router.push(`/${permissions[0].permission_name}`)
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login automático:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (token) handleAutoLogin();
+    else setIsLoading(false);
+  }, [token]);
+
+  if (isLoading) return <LottieAnimations className="h-[100vh] w-full flex items-center justify-center" type="loading" />;
 
   return (
     <div className="h-screen flex justify-center items-center">

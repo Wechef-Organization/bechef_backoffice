@@ -29,7 +29,7 @@ const InputPassword: React.FC<InputPassProps> = ({ label, name, control, rules, 
               onChange={field.onChange}
               placeholder={placeHolder}
               disabled={disabled}
-              type={type}
+              type={seePassword ? type : "password"}
             />
             <button
               className="absolute top-4 right-4 w-5"
