@@ -71,7 +71,7 @@ api.interceptors.response.use(
                 isRefreshing = true;
 
                 try {
-                    const refreshResponse = await api.post('/auth/refresh', {
+                    const refreshResponse = await api.post('/adm/auth/refresh', {
                         accessToken,
                     });
 

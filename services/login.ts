@@ -13,7 +13,7 @@ export const login = async ({ email, password, setIsLoading }: Login) => {
 	try {
 		setIsLoading(true);
 
-		const response = await api.post('/auth/login', {
+		const response = await api.post('/adm/auth/login', {
 			email,
 			password,
 		});
