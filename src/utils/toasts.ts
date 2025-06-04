@@ -21,7 +21,7 @@ export const sendToast = (type: string, message: string) => {
 		toast.error(message, {
 			style: {
 				...commonStyle,
-				backgroundColor: '#ffff84',
+				backgroundColor: '#f3b70d',
 			},
 		});
 	} else if (type === 'info') {

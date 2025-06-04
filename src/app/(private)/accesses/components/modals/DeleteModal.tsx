@@ -2,7 +2,7 @@
 
 import Button from "@/components/Button";
 import { useAccesses } from "@/context/AccessesContext";
-import { deleteUser } from "@/utils/accesses/users";
+import { deleteUser } from "@/utils/accesses/adms";
 import Image from "next/image";
 import { FC, useEffect } from "react";
 import Modal from "react-modal";

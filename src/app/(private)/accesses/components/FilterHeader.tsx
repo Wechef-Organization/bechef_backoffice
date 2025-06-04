@@ -4,13 +4,16 @@ import Button from "@/components/Button";
 import InputSearch from "@/components/InputSearch";
 import { useAccesses } from "@/context/AccessesContext";
 
-const FilterHeader = () => {
+const FilterHeader = ({ fetchData }: { fetchData: () => Promise<void> }) => {
     const { searchValue, setSearchValue, setUserSelected, setUserIsOpen } = useAccesses()
 
     return (
         <div className="flex items-center justify-between gap-3">
-            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} />
-            <Button
+            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    fetchData();
+                }
+            }} /> <Button
                 name="Novo usuário"
                 className="w-44 h-11"
                 textColor="text-white"

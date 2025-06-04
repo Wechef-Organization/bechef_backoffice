@@ -1,3 +1,11 @@
+
+interface permissionsAdm {
+    permission_name: string
+}
+interface userpermissionadm {
+    permissionsAdm: permissionsAdm
+}
+
 export interface User {
     id?: number,
     image: string,
@@ -5,4 +13,5 @@ export interface User {
     email: string,
     password: string,
     permissions: string,
+    userpermissionsadm: userpermissionadm[]
 } 

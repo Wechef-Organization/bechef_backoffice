@@ -5,7 +5,7 @@ import InputChips from "@/components/InputChips";
 import InputPassword from "@/components/InputPassword";
 import InputText from "@/components/InputText";
 import { useAccesses } from "@/context/AccessesContext";
-import { addUser, editUser } from "@/utils/accesses/users";
+import { addUser, editUser } from "@/utils/accesses/adms";
 import Image from "next/image";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
