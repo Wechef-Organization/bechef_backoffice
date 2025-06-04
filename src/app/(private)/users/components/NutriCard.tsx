@@ -1,9 +1,22 @@
+"use client"
+
 
 import { Nutri } from "@/interfaces/users"
 import formatDate from "@/utils/formatDate"
+import { updateStatus } from "@/utils/users/updateStatus"
 import Image from "next/image"
+import { useState } from "react"
 
-const NutriCard = ({ nutri }: { nutri: Nutri }) => {
+const NutriCard = ({ nutri, fetchData }: { nutri: Nutri, fetchData: () => Promise<void> }) => {
+
+    const [loading, setLoading] = useState(false);
+
+
+    const update = async (status: boolean) => {
+        if (loading) return;
+        await updateStatus({ id: nutri.id, type: "nutri", status, fetchData, setLoading })
+    }
+
     return (
         <div className="w-full border border-border rounded-xl p-4">
             <div className="w-full h-20 flex items-center justify-between">
@@ -37,13 +50,13 @@ const NutriCard = ({ nutri }: { nutri: Nutri }) => {
 
                 </div>
                 <div className="min-w-[1px] min-h-[60%] bg-border mx-3" />
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-2 cursor-pointer">
                     {
                         nutri.status ?
 
-                            <Image alt="Switch Ligado" src={"images/Products/switchOn.svg"} width={35} height={16} />
+                            <Image alt="Switch Ligado" src={"images/Products/switchOn.svg"} width={35} height={16} onClick={() => { update(false) }} />
                             :
-                            <Image alt="Switch Ligado" src={"images/Products/switchOff.svg"} width={35} height={16} />
+                            <Image alt="Switch Ligado" src={"images/Products/switchOff.svg"} width={35} height={16} onClick={() => { update(true) }} />
 
                     }
                     <span className="text-[10px] font-medium text-grey7 text-center">Status</span>

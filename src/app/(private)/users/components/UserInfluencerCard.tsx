@@ -1,8 +1,19 @@
+"use client"
+
 import { User } from "@/interfaces/users"
 import formatDate from "@/utils/formatDate"
+import { updateStatus } from "@/utils/users/updateStatus"
 import Image from "next/image"
+import { useState } from "react"
 
-const UserInfluencerCard = ({ user }: { user: User }) => {
+const UserInfluencerCard = ({ user, fetchData }: { user: User, fetchData: () => Promise<void> }) => {
+
+    const [loading, setLoading] = useState(false);
+
+    const update = async (status: boolean) => {
+        if (loading) return;
+        await updateStatus({ id: user.id, type: "user", status, fetchData, setLoading })
+    }
 
     return (
         <div className="w-full border border-border rounded-xl p-4">
@@ -41,13 +52,13 @@ const UserInfluencerCard = ({ user }: { user: User }) => {
 
                 </div>
                 <div className="min-w-[1px] min-h-[60%] bg-border mx-3" />
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-2 cursor-pointer">
                     {
-                        user.approved ?
+                        user.status ?
 
-                            <Image alt="Switch Ligado" src={"images/Products/switchOn.svg"} width={35} height={16} />
+                            <Image alt="Switch Ligado" src={"images/Products/switchOn.svg"} width={35} height={16} onClick={() => { update(false) }} />
                             :
-                            <Image alt="Switch Ligado" src={"images/Products/switchOff.svg"} width={35} height={16} />
+                            <Image alt="Switch Ligado" src={"images/Products/switchOff.svg"} width={35} height={16} onClick={() => { update(true) }} />
 
                     }
                     <span className="text-[10px] font-medium text-grey7 text-center">Status</span>

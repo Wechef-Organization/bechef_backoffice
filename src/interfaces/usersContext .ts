@@ -12,12 +12,12 @@ export interface UsersContextType {
     setInfluencersList: React.Dispatch<React.SetStateAction<User[]>>;
     nutriList: Nutri[];
     setNutriList: React.Dispatch<React.SetStateAction<Nutri[]>>;
-    usersApprovalsList: UserApprovals[];
-    setUsersApprovalsList: React.Dispatch<React.SetStateAction<UserApprovals[]>>;
-    influencersApprovalsList: UserApprovals[];
-    setInfluencersApprovalsList: React.Dispatch<React.SetStateAction<UserApprovals[]>>;
-    nutriApprovalsList: NutriApprovals[];
-    setNutriApprovalsList: React.Dispatch<React.SetStateAction<NutriApprovals[]>>;
+    usersApprovalsList: User[];
+    setUsersApprovalsList: React.Dispatch<React.SetStateAction<User[]>>;
+    influencersApprovalsList: User[];
+    setInfluencersApprovalsList: React.Dispatch<React.SetStateAction<User[]>>;
+    nutriApprovalsList: Nutri[];
+    setNutriApprovalsList: React.Dispatch<React.SetStateAction<Nutri[]>>;
 
     switchSelected: string;
     setSwitchSelected: React.Dispatch<React.SetStateAction<string>>;

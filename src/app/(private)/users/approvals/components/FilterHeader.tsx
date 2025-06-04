@@ -4,12 +4,16 @@
 import InputSearch from "@/components/InputSearch";
 import { useUsers } from "@/context/UsersContext";
 
-const FilterHeader = () => {
+const FilterHeader = ({ fetchData }: { fetchData: () => Promise<void> }) => {
     const { searchValue, setSearchValue, switchSelected, setSwitchSelected } = useUsers()
 
     return (
         <div className="flex items-center gap-3">
-            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} />
+            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    fetchData();
+                }
+            }} />
             <div className="h-11 flex gap-2 p-1 border border-border rounded-full">
                 <div
                     className={`flex items-center py-1 px-4 ${switchSelected == "users" ? "bg-primarycolor" : "bg-white"} rounded-full cursor-pointer`}

@@ -4,21 +4,30 @@ import { useForm } from "react-hook-form";
 
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
-import { NutriApprovals } from "@/interfaces/approvals";
+import { Nutri } from "@/interfaces/users";
 import Image from "next/image";
+import { approveUser, rejectUser } from "@/utils/users/approvals";
 
-const NutriCard = ({ nutri }: { nutri: NutriApprovals }) => {
+const NutriCard = ({ nutri, fetchData }: { nutri: Nutri, fetchData: () => Promise<void> }) => {
     const {
         control,
         formState: { errors },
     } = useForm({
         defaultValues: {
             name: nutri.name,
-            document: nutri.document,
-            number: nutri.number,
+            cpf: nutri.cpf,
+            whatsapp: nutri.whatsapp,
             email: nutri.email,
         }
     });
+
+    const handleClick = async () => {
+        await approveUser({ id: nutri.id, type: "nutri", fetchData })
+    }
+
+    const reject = async () => {
+        await rejectUser({ id: nutri.id, type: "nutri", fetchData })
+    }
 
     return (
         <div className="w-[31%] border border-border p-5 rounded-xl flex flex-col gap-5">
@@ -34,18 +43,18 @@ const NutriCard = ({ nutri }: { nutri: NutriApprovals }) => {
                 />
                 <InputText
                     label="CPF"
-                    name="document"
+                    name="cpf"
                     control={control}
                     placeHolder=""
-                    error={errors.document}
+                    error={errors.cpf}
                     disabled
                 />
                 <InputText
                     label="WhatsApp"
-                    name="number"
+                    name="whatsapp"
                     control={control}
                     placeHolder=""
-                    error={errors.number}
+                    error={errors.whatsapp}
                     disabled
                 />
                 <InputText
@@ -62,13 +71,13 @@ const NutriCard = ({ nutri }: { nutri: NutriApprovals }) => {
                 <div className="p-5 border border-dashed border-border rounded-xl flex flex-col gap-5">
                     <p className="text-[13px] font-medium">Upload do RG ou CNH aberto</p>
                     <div className="w-full flex items-center justify-center">
-                        <Image src={nutri.document_image} alt="Documento" width={252} height={99} />
+                        {/* <Image src={nutri.rg_photo} alt="Documento" width={252} height={99} /> */}
                     </div>
                 </div>
                 <div className="p-5 border border-dashed border-border rounded-xl flex flex-col gap-5">
                     <p className="text-[13px] font-medium">Upload segurando documento</p>
                     <div className="w-full flex items-center justify-center">
-                        <Image src={nutri.image} alt="Usuário" width={81} height={108} />
+                        {/* <Image src={nutri.holding_rg_photo} alt="Usuário" width={81} height={108} /> */}
                     </div>
                 </div>
             </div>
@@ -79,6 +88,7 @@ const NutriCard = ({ nutri }: { nutri: NutriApprovals }) => {
                     textColor="text-white"
                     backgroundColor="bg-primarycolor"
                     type="submit"
+                    onClick={handleClick}
                 />
                 <Button
                     name="Recusar"
@@ -86,6 +96,7 @@ const NutriCard = ({ nutri }: { nutri: NutriApprovals }) => {
                     textColor="text-red5"
                     backgroundColor="bg-red4"
                     type="submit"
+                    onClick={reject}
                 />
             </div>
         </div>

@@ -4,22 +4,33 @@ import { useForm } from "react-hook-form";
 
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
-import { UserApprovals } from "@/interfaces/approvals";
+import { User } from "@/interfaces/users";
 import Image from "next/image";
+import { approveUser, rejectUser } from "@/utils/users/approvals";
 
-const UserInfluencerCard = ({ user }: { user: UserApprovals }) => {
+const UserInfluencerCard = ({ user, fetchData }: { user: User, fetchData: () => Promise<void> }) => {
     const {
         control,
         formState: { errors },
     } = useForm({
         defaultValues: {
             name: user.name,
-            document: user.document,
-            nick_name: user.nick_name,
-            number: user.number,
+            cpf: user.cpf || "Não cadastrado",
+            nickname: user.nickname,
+            whatsapp: user.whatsapp || "Não cadastrado",
             email: user.email,
+            rg_photo: user.rg_photo,
+            holding_rg_photo: user.holding_rg_photo,
         }
     });
+
+    const handleClick = async () => {
+        await approveUser({ id: user.id, type: "user", fetchData })
+    }
+
+    const reject = async () => {
+        await rejectUser({ id: user.id, type: "user", fetchData })
+    }
 
     return (
         <div className="w-[31%] border border-border p-5 rounded-xl flex flex-col gap-5">
@@ -35,26 +46,26 @@ const UserInfluencerCard = ({ user }: { user: UserApprovals }) => {
                 />
                 <InputText
                     label="CPF"
-                    name="document"
+                    name="cpf"
                     control={control}
                     placeHolder=""
-                    error={errors.document}
+                    error={errors.cpf}
                     disabled
                 />
                 <InputText
                     label="Instagram"
-                    name="nick_name"
+                    name="nickname"
                     control={control}
                     placeHolder=""
-                    error={errors.nick_name}
+                    error={errors.nickname}
                     disabled
                 />
                 <InputText
                     label="WhatsApp"
-                    name="number"
+                    name="whatsapp"
                     control={control}
                     placeHolder=""
-                    error={errors.number}
+                    error={errors.whatsapp}
                     disabled
                 />
                 <InputText
@@ -71,13 +82,13 @@ const UserInfluencerCard = ({ user }: { user: UserApprovals }) => {
                 <div className="p-5 border border-dashed border-border rounded-xl flex flex-col gap-5">
                     <p className="text-[13px] font-medium">Upload do RG ou CNH aberto</p>
                     <div className="w-full flex items-center justify-center">
-                        <Image src={user.document_image} alt="Documento" width={252} height={99} />
+                        {/* <Image src={user.rg_photo} alt="Documento" width={252} height={99} /> */}
                     </div>
                 </div>
                 <div className="p-5 border border-dashed border-border rounded-xl flex flex-col gap-5">
                     <p className="text-[13px] font-medium">Upload segurando documento</p>
                     <div className="w-full flex items-center justify-center">
-                        <Image src={user.image} alt="Usuário" width={81} height={108} />
+                        {/* <Image src={user.holding_rg_photo} alt="Usuário" width={81} height={108} /> */}
                     </div>
                 </div>
             </div>
@@ -88,6 +99,7 @@ const UserInfluencerCard = ({ user }: { user: UserApprovals }) => {
                     textColor="text-white"
                     backgroundColor="bg-primarycolor"
                     type="submit"
+                    onClick={handleClick}
                 />
                 <Button
                     name="Recusar"
@@ -95,6 +107,7 @@ const UserInfluencerCard = ({ user }: { user: UserApprovals }) => {
                     textColor="text-red5"
                     backgroundColor="bg-red4"
                     type="submit"
+                    onClick={reject}
                 />
             </div>
         </div>

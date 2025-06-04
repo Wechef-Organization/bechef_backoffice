@@ -10,9 +10,10 @@ interface GetAllClientsParams {
     page?: number;
     orderBy?: string;
     sortBy?: 'ASC' | 'DESC';
+    approved?: string
 }
 
-export const getAllInfluencers = async ({ setLoading, setInfluencersList, search, page, setOrdersCount, orderBy, sortBy }: GetAllClientsParams) => {
+export const getAllInfluencers = async ({ setLoading, setInfluencersList, search, page, setOrdersCount, orderBy, sortBy, approved }: GetAllClientsParams) => {
     try {
         setLoading && setLoading(true);
 
@@ -22,6 +23,7 @@ export const getAllInfluencers = async ({ setLoading, setInfluencersList, search
         if (page) queryParams.append('page', `${page}`);
         if (orderBy) queryParams.append('order', orderBy);
         if (sortBy) queryParams.append('sortBy', sortBy);
+        if (approved) queryParams.append('approved', approved);
 
         const response = await api.get(`adm/users/influencers?${queryParams.toString()}`);
 

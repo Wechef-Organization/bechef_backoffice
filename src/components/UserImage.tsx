@@ -2,7 +2,6 @@ import Image from "next/image"
 
 import { UserImageProps } from "@/interfaces/header"
 
-
 const UserImage: React.FC<UserImageProps> = ({ url, width, header }) => {
     return (
         <Image

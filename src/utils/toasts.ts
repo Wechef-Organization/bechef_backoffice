@@ -14,14 +14,14 @@ export const sendToast = (type: string, message: string) => {
 		toast.success(message, {
 			style: {
 				...commonStyle,
-				backgroundColor: '#D9032C',
+				backgroundColor: '#3BB6FC',
 			},
 		});
 	} else if (type === 'error') {
 		toast.error(message, {
 			style: {
 				...commonStyle,
-				backgroundColor: '#F44336',
+				backgroundColor: '#ffff84',
 			},
 		});
 	} else if (type === 'info') {

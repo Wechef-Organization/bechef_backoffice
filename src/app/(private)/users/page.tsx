@@ -34,6 +34,7 @@ const Users = () => {
         setOrdersCount,
         orderBy,
         sortBy,
+        approved: "true"
       });
     }
     if (switchSelected == "influencers") {
@@ -45,6 +46,8 @@ const Users = () => {
         setOrdersCount,
         orderBy,
         sortBy,
+        approved: "true"
+
       });
     }
     if (switchSelected == "nutri") {
@@ -56,6 +59,8 @@ const Users = () => {
         setOrdersCount,
         orderBy,
         sortBy,
+        approved: "true"
+
       });
     }
   };
@@ -93,13 +98,13 @@ const Users = () => {
               <>
                 <div className="flex flex-col gap-4">
                   {switchSelected == "users" && usersList?.length > 0 && usersList?.map((elm) => (
-                    <UserInfluencerCard key={elm.id} user={elm} />
+                    <UserInfluencerCard key={elm.id} user={elm} fetchData={fetchData} />
                   ))}
                   {switchSelected == "influencers" && influencersList?.length > 0 && influencersList?.map((elm) => (
-                    <UserInfluencerCard key={elm.id} user={elm} />
+                    <UserInfluencerCard key={elm.id} user={elm} fetchData={fetchData} />
                   ))}
                   {switchSelected == "nutri" && nutriList?.length > 0 && nutriList?.map((elm) => (
-                    <NutriCard key={elm.id} nutri={elm} />
+                    <NutriCard key={elm.id} nutri={elm} fetchData={fetchData} />
                   ))}
                 </div>
                 <div className="w-full flex justify-center items-center py-3">
@@ -108,7 +113,6 @@ const Users = () => {
               :
               <div className="flex flex-col gap-4 items-center justify-center">
                 <Image
-                  className="cursor-pointer"
                   src={"images/Global/emptyList.svg"}
                   alt="Lista vazia"
                   width={400}

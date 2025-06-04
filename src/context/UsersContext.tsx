@@ -13,9 +13,9 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [influencersList, setInfluencersList] = useState<User[]>([])
   const [nutriList, setNutriList] = useState<Nutri[]>([])
 
-  const [usersApprovalsList, setUsersApprovalsList] = useState<UserApprovals[]>([])
-  const [influencersApprovalsList, setInfluencersApprovalsList] = useState<UserApprovals[]>([])
-  const [nutriApprovalsList, setNutriApprovalsList] = useState<NutriApprovals[]>([])
+  const [usersApprovalsList, setUsersApprovalsList] = useState<User[]>([])
+  const [influencersApprovalsList, setInfluencersApprovalsList] = useState<User[]>([])
+  const [nutriApprovalsList, setNutriApprovalsList] = useState<Nutri[]>([])
 
   const [switchSelected, setSwitchSelected] = useState<string>("users")
 

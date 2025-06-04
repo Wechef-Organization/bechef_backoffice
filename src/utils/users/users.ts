@@ -10,9 +10,10 @@ interface GetAllClientsParams {
     page?: number;
     orderBy?: string;
     sortBy?: 'ASC' | 'DESC';
+    approved?: string
 }
 
-export const getAllUsers = async ({ setLoading, setUsersList, search, page, setOrdersCount, orderBy, sortBy }: GetAllClientsParams) => {
+export const getAllUsers = async ({ setLoading, setUsersList, search, page, setOrdersCount, orderBy, sortBy, approved }: GetAllClientsParams) => {
     try {
         setLoading && setLoading(true);
 
@@ -22,6 +23,7 @@ export const getAllUsers = async ({ setLoading, setUsersList, search, page, setO
         if (page) queryParams.append('page', `${page}`);
         if (orderBy) queryParams.append('order', orderBy);
         if (sortBy) queryParams.append('sortBy', sortBy);
+        if (approved) queryParams.append('approved', approved);
 
         const response = await api.get(`adm/users?${queryParams.toString()}`);
 
@@ -30,7 +32,7 @@ export const getAllUsers = async ({ setLoading, setUsersList, search, page, setO
 
         return response.data;
     } catch (error: any) {
-        sendToast('error', error?.response?.data?.message || 'Erro ao buscar clientes');
+        sendToast('error', error?.response?.data?.message || 'Erro ao buscar usuários');
     } finally {
         setLoading && setLoading(false);
     }
