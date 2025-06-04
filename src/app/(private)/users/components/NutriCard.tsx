@@ -1,5 +1,6 @@
 
 import { Nutri } from "@/interfaces/users"
+import formatDate from "@/utils/formatDate"
 import Image from "next/image"
 
 const NutriCard = ({ nutri }: { nutri: Nutri }) => {
@@ -7,16 +8,22 @@ const NutriCard = ({ nutri }: { nutri: Nutri }) => {
         <div className="w-full border border-border rounded-xl p-4">
             <div className="w-full h-20 flex items-center justify-between">
                 <div className="w-[25%] flex items-center gap-4">
-                    <Image alt="Usuário" src={nutri.image} width={44} height={44} className="rounded-xl" />
+                    {/* {nutri?.profile_photo ?
+                        <Image alt="Usuário" src={nutri?.profile_photo} width={44} height={44} className="rounded-xl" />
+                        :
+                    } */}
+                    <div className="w-11 h-11 rounded-xl bg-gray-200 flex items-center justify-center">
+                        <Image alt="Usuário" src={"images/Users/userDefault.svg"} width={24} height={24} className="rounded-xl" />
+                    </div>
                     <div>
                         <p className="text-[14px] font-semibold">{nutri.name}</p>
-                        <p className="text-[13px] font-semibold text-grey7 ">CPF: {nutri.document}</p>
+                        <p className="text-[13px] font-semibold text-grey7 ">CPF: {nutri.cpf}</p>
                     </div>
                 </div>
                 <div className="min-w-[1px] min-h-[60%] bg-border mx-3" />
                 <div className="w-[55%] flex items-center justify-between">
                     <div className="flex flex-col items-center">
-                        <p className="text-[13px] font-medium text-center">{nutri.date}</p>
+                        <p className="text-[13px] font-medium text-center">{formatDate(nutri?.createdAt)}</p>
                         <span className="text-[10px] font-medium text-grey7 text-center">Data de cadastro</span>
                     </div>
                     <div className="flex flex-col items-center">
@@ -24,7 +31,7 @@ const NutriCard = ({ nutri }: { nutri: Nutri }) => {
                         <span className="text-[10px] font-medium text-grey7 text-center">E-mail</span>
                     </div>
                     <div className="flex flex-col items-center">
-                        <p className="text-[13px] font-medium text-center">{nutri.number}</p>
+                        <p className="text-[13px] font-medium text-center">{nutri.whatsapp}</p>
                         <span className="text-[10px] font-medium text-grey7 text-center">WhatsApp</span>
                     </div>
 

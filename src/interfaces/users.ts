@@ -1,22 +1,22 @@
 export interface User {
     id: number,
-    image: string,
+    profile_photo: string,
     name: string,
-    document: string,
-    date: string,
-    nick_name: string,
+    cpf: string,
+    createdAt: string,
+    nickname: string,
     email: string,
-    number: string,
-    status: boolean,
+    whatsapp: string,
+    approved: boolean,
 };
 
 export interface Nutri {
     id: number,
-    image: string,
+    profile_photo: string,
     name: string,
-    document: string,
-    date: string,
+    cpf: string,
+    createdAt: string,
     email: string,
-    number: string,
+    whatsapp: string,
     status: boolean,
 };

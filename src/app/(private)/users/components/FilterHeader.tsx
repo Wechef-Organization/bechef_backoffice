@@ -7,12 +7,16 @@ import InputSearch from "@/components/InputSearch";
 import { useUsers } from "@/context/UsersContext";
 import Link from "next/link";
 
-const FilterHeader = () => {
+const FilterHeader = ({ fetchData }: { fetchData: () => Promise<void> }) => {
     const { searchValue, setSearchValue, switchSelected, setSwitchSelected } = useUsers()
 
     return (
         <div className="flex items-center gap-3">
-            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} />
+            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    fetchData();
+                }
+            }} />
             <Link href={"/users/approvals"}>
                 <Image
                     src={"/images/Users/check.svg"}

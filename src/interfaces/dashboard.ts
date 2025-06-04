@@ -12,4 +12,5 @@ export interface InputSearchProps {
     setValue: Dispatch<SetStateAction<string>>;
     width?: string
     heigth?: string
+    onKeyDown: (e: any) => void
 };
