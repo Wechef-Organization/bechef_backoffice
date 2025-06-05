@@ -15,6 +15,8 @@ export const AccessesProvider = ({ children }: AccessesProviderProps) => {
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
   const [userIsOpen, setUserIsOpen] = useState<boolean>(false);
 
+  const [permissionsOptions, setPermissionsOptions] = useState<string[]>([]);
+
   return (
     <AccessesContext.Provider
       value={{
@@ -25,7 +27,9 @@ export const AccessesProvider = ({ children }: AccessesProviderProps) => {
 
         actionsIsOpen, setActionsIsOpen,
         deleteOpen, setDeleteOpen,
-        userIsOpen, setUserIsOpen
+        userIsOpen, setUserIsOpen,
+
+        permissionsOptions, setPermissionsOptions
       }}
     >
       {children}

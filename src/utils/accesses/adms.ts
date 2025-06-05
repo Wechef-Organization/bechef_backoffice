@@ -3,6 +3,7 @@ import usersList from "@/mock/Accesses/usersList";
 
 import { sendToast } from '../toasts';
 import { api } from '../../../services/api';
+import { Dispatch, SetStateAction } from "react";
 
 interface GetAllClientsParams {
     setLoading?: (value: boolean) => void;
@@ -38,6 +39,14 @@ export const getAllAdms = async ({ setLoading, setUsersList, search, page, setOr
     }
 };
 
+export const getAllPermissions = async ({ setPermissionsOptions }: { setPermissionsOptions: Dispatch<SetStateAction<string[]>> }) => {
+    try {
+        const response = await api.get(`adm/accesses/permissions`);
+        setPermissionsOptions(response.data)
+    } catch (error: any) {
+        sendToast('error', error?.response?.data?.message || 'Erro ao buscar permissões');
+    }
+};
 
 export const deleteUser = ({ setUsers, list, id }: { setUsers: React.Dispatch<React.SetStateAction<User[]>>, list: User[], id: number | undefined }) => {
     setUsers(list.filter(user => user.id !== id));
@@ -47,8 +56,13 @@ export const editUser = ({ setUsers, list, id, updatedUser }: { setUsers: React.
     setUsers(list.map(user => (user.id === id ? { ...user, ...updatedUser } : user)));
 };
 
-export const addUser = ({ setUsers, list, newUser }: { setUsers: React.Dispatch<React.SetStateAction<User[]>>, list: User[], newUser: Omit<typeof list[0], "id"> }) => {
-    const newUserWithId = { ...newUser, id: list.length + 1 };
-    setUsers([...list, newUserWithId]);
+export const addUser = async ({ fetchData, newUser }: { fetchData: () => Promise<void>, newUser: { profile_photo: string; name: string; email: string; password: string; permissions: string[] } }) => {
+    try {
+        await api.post(`adm`, newUser);
+        sendToast('success', 'Usuário adicionado com sucesso');
+        fetchData()
+    } catch (error: any) {
+        sendToast('error', error?.response?.data?.message || 'Erro ao adicionar usuário');
+    }
 };
 

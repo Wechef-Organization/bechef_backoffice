@@ -10,7 +10,6 @@ import InputPassword from "@/components/InputPassword";
 import InputText from "@/components/InputText";
 import LoginForm from "@/interfaces/login";
 import { useEffect, useState } from "react";
-import { sendToast } from "@/utils/toasts";
 import { autoLogin } from "../../services/autoLogin";
 import { login } from "../../services/login";
 import { LottieAnimations } from "@/components/LottieAnimations";
@@ -41,19 +40,7 @@ const Login = () => {
   };
 
   const handleAutoLogin = async () => {
-    try {
-      setIsLoading(true);
-      const { permissions } = await autoLogin();
-      if (permissions.length < 1) {
-        sendToast('error', 'Seu usuário não tem permissão para acessar a plataforma.');
-      } else {
-        router.push(`/${permissions[0].permission_name}`)
-      }
-    } catch (error) {
-      console.error('Erro ao fazer login automático:', error);
-    } finally {
-      setIsLoading(false);
-    }
+    await autoLogin({ setIsLoading, router });
   };
 
   useEffect(() => {

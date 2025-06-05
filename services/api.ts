@@ -1,6 +1,7 @@
 import axios from 'axios';
 import secureLocalStorage from 'react-secure-storage';
 import { sendToast } from '../src/utils/toasts';
+import { NextRouter, useRouter } from 'next/router';
 
 export const api = axios.create({
     baseURL: 'http://localhost:8080',
@@ -25,9 +26,14 @@ api.interceptors.request.use(
 let isRefreshing = false;
 let refreshSubscribers: Array<(token: string) => void> = [];
 
-const forceLogout = () => {
+
+const forceLogout = (router: NextRouter) => {
     secureLocalStorage.removeItem('@ADMINTOKEN');
-    window.location.href = '/login';
+    if (router) {
+        router.push('/');
+    } else {
+        window.location.href = '/';
+    }
 };
 
 const onRefreshed = (newToken: string) => {
@@ -51,9 +57,10 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
+        const router = useRouter();
 
-        if (originalRequest.url === '/auth/refresh') {
-            forceLogout();
+        if (originalRequest.url === '/adm/auth/refresh') {
+            forceLogout(router);
             return Promise.reject(error);
         }
 
@@ -63,7 +70,7 @@ api.interceptors.response.use(
             const accessToken = secureLocalStorage.getItem('@ADMINTOKEN');
 
             if (!accessToken) {
-                forceLogout();
+                forceLogout(router);
                 return Promise.reject(error);
             }
 
@@ -84,7 +91,7 @@ api.interceptors.response.use(
                     isRefreshing = false;
                     onFailedRefresh();
                     sendToast('error', 'Seu usuário não tem permissão para acessar a plataforma.');
-                    forceLogout();
+                    forceLogout(router);
                     return Promise.reject(error);
                 }
             }

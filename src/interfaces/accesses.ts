@@ -8,7 +8,7 @@ interface userpermissionadm {
 
 export interface User {
     id?: number,
-    image: string,
+    profile_photo: string,
     name: string,
     email: string,
     password: string,

@@ -1,6 +1,8 @@
+import "../globals.css";
+import 'primereact/resources/primereact.min.css';
+import "primereact/resources/themes/fluent-light/theme.css"
 
 import Sidebar from "@/components/Sidebar";
-import "../globals.css";
 import { Toaster } from "sonner";
 
 export default function RootLayout({

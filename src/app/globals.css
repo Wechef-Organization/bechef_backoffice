@@ -141,3 +141,26 @@ input[type="number"] {
 .custom-scrollbar::-webkit-scrollbar {
   height: 6px;
 }
+
+/* 1) Container de labels em flex-wrap e quebra de linha */
+.p-multiselect-label-container[data-pc-section='labelcontainer'] {
+  padding-top: 7px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+	display: flex !important;
+	align-items: flex-start !important;
+	gap: 0.5rem 0.75rem !important; /* espaçamento entre chips */
+	white-space: normal !important; /* permite quebrar linha */
+	overflow-x: visible !important; /* remove scroll horizontal */
+	overflow-y: hidden !important; /* mostra toda altura necessária */
+}
+
+.p-multiselect-label[data-pc-section='label'] {
+	flex: none !important; /* não encolhe nem expande */
+	margin: 0.25rem 0.5rem !important; /* espaçamento interno entre chips */
+	padding: 0 !important;
+}
+
+.p-multiselect-label {
+	display: contents !important;
+}

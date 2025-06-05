@@ -1,11 +1,11 @@
 "use client"
 
 import Button from "@/components/Button";
-import InputChips from "@/components/InputChips";
+import MultiSelect from "@/components/MultiSelect";
 import InputPassword from "@/components/InputPassword";
 import InputText from "@/components/InputText";
 import { useAccesses } from "@/context/AccessesContext";
-import { addUser, editUser } from "@/utils/accesses/adms";
+import { addUser, editUser, getAllPermissions } from "@/utils/accesses/adms";
 import Image from "next/image";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -13,9 +13,15 @@ import Modal from "react-modal";
 import ImageInput from "../ImageInput";
 
 
-const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchData: () => Promise<void>
+}
 
-  const { userSelected, setUserSelected, setUsersList, usersList } = useAccesses()
+const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
+
+  const { userSelected, setUserSelected, setUsersList, usersList, permissionsOptions, setPermissionsOptions } = useAccesses()
 
   const {
     handleSubmit,
@@ -23,14 +29,14 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
     formState: { errors },
     reset
   } = useForm<{
-    image: string;
+    profile_photo: string;
     name: string;
     email: string;
     password: string;
     permissions: string[];
   }>({
     defaultValues: {
-      image: "",
+      profile_photo: "",
       name: "",
       email: "",
       password: "",
@@ -43,7 +49,7 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
   useEffect(() => {
     if (userSelected) {
       reset({
-        image: userSelected.image || "",
+        profile_photo: userSelected.profile_photo || "",
         name: userSelected.name || "",
         email: userSelected.email || "",
         password: userSelected.password || "",
@@ -55,7 +61,7 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
   const onClose = () => {
     setUserSelected(undefined)
     reset({
-      image: "",
+      profile_photo: "",
       name: "",
       email: "",
       password: "",
@@ -64,22 +70,24 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
     setIsOpen(false)
   }
 
-  const onSubmit = (data: { image: string; name: string; email: string; password: string; permissions: string[] }) => {
-    const formattedData = {
-      ...data,
-      permissions: data.permissions.join(","),
-    };
+  const onSubmit = (data: { profile_photo: string; name: string; email: string; password: string; permissions: string[] }) => {
+
 
     if (userSelected) {
-      editUser({ setUsers: setUsersList, list: usersList, id: userSelected.id, updatedUser: formattedData });
+      // editUser({ setUsers: setUsersList, list: usersList, id: userSelected.id, updatedUser: formattedData });
     } else {
-      addUser({ setUsers: setUsersList, list: usersList, newUser: formattedData });
+      addUser({ fetchData, newUser: data });
     }
     onClose();
   };
 
+  const getPermissions = async () => {
+    await getAllPermissions({ setPermissionsOptions })
+  }
+
   useEffect(() => {
     Modal.setAppElement(document.body);
+    getPermissions()
   }, []);
 
   return (
@@ -112,12 +120,9 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
       </div>
       <div className="w-full flex flex-col items-center gap-5 p-5">
         <ImageInput
-          name="image"
+          name="profile_photo"
           control={control}
-          rules={{
-            required: "Campo obrigatório!",
-          }}
-          error={errors.image}
+          error={errors.profile_photo}
         />
         <div className="w-full flex items-center justify-between">
           <InputText
@@ -163,7 +168,7 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             }}
             error={errors.password}
           />
-          <InputChips
+          <MultiSelect
             width="w-[48%]"
             label="Permissão"
             name="permissions"
@@ -173,6 +178,7 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
               required: "Campo obrigatório!",
             }}
             error={errors.permissions}
+            options={permissionsOptions}
           />
         </div>
       </div>

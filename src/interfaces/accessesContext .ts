@@ -16,6 +16,9 @@ export interface AccessesContextType {
     setDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
     userIsOpen: boolean;
     setUserIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
+    permissionsOptions: string[]
+    setPermissionsOptions: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export interface AccessesProviderProps {
