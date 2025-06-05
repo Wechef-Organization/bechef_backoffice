@@ -1,13 +1,14 @@
 
-interface permissionsAdm {
+export interface permissionsAdm {
+    id: string
     permission_name: string
 }
-interface userpermissionadm {
+export interface userpermissionadm {
     permissionsAdm: permissionsAdm
 }
 
 export interface User {
-    id?: number,
+    id: string,
     profile_photo: string,
     name: string,
     email: string,

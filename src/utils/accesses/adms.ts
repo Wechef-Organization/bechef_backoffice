@@ -1,4 +1,4 @@
-import { User } from "@/interfaces/accesses";
+import { permissionsAdm, User, userpermissionadm } from "@/interfaces/accesses";
 import usersList from "@/mock/Accesses/usersList";
 
 import { sendToast } from '../toasts';
@@ -49,14 +49,20 @@ export const getAllPermissions = async ({ setPermissionsOptions }: { setPermissi
 };
 
 export const deleteUser = ({ setUsers, list, id }: { setUsers: React.Dispatch<React.SetStateAction<User[]>>, list: User[], id: number | undefined }) => {
-    setUsers(list.filter(user => user.id !== id));
+    // setUsers(list.filter(user => user.id !== id));
 }
 
-export const editUser = ({ setUsers, list, id, updatedUser }: { setUsers: React.Dispatch<React.SetStateAction<User[]>>, list: User[], id: number | undefined, updatedUser: Partial<typeof list[0]> }) => {
-    setUsers(list.map(user => (user.id === id ? { ...user, ...updatedUser } : user)));
+export const editUser = async ({ fetchData, newUser, id }: { fetchData: () => Promise<void>, newUser: { profile_photo: string; name: string; email: string; password: string; permissions: permissionsAdm[] }, id: string }) => {
+    try {
+        await api.patch(`adm/${id}`, newUser);
+        sendToast('success', 'Usuário editado com sucesso');
+        fetchData()
+    } catch (error: any) {
+        sendToast('error', error?.response?.data?.message || 'Erro ao editar usuário');
+    }
 };
 
-export const addUser = async ({ fetchData, newUser }: { fetchData: () => Promise<void>, newUser: { profile_photo: string; name: string; email: string; password: string; permissions: string[] } }) => {
+export const addUser = async ({ fetchData, newUser }: { fetchData: () => Promise<void>, newUser: { profile_photo: string; name: string; email: string; password: string; permissions: permissionsAdm[] } }) => {
     try {
         await api.post(`adm`, newUser);
         sendToast('success', 'Usuário adicionado com sucesso');

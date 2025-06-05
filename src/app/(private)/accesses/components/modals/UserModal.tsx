@@ -11,6 +11,7 @@ import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import ImageInput from "../ImageInput";
+import { permissionsAdm } from "@/interfaces/accesses";
 
 
 interface ModalProps {
@@ -33,7 +34,7 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
     name: string;
     email: string;
     password: string;
-    permissions: string[];
+    permissions: permissionsAdm[];
   }>({
     defaultValues: {
       profile_photo: "",
@@ -47,13 +48,16 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
   const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
   useEffect(() => {
+
     if (userSelected) {
+      const permissions = userSelected.userpermissionsadm.map((elm) =>
+        elm.permissionsAdm
+      )
       reset({
         profile_photo: userSelected.profile_photo || "",
         name: userSelected.name || "",
         email: userSelected.email || "",
-        password: userSelected.password || "",
-        permissions: userSelected.permissions ? userSelected.permissions.split(',') : [],
+        permissions: permissions || [],
       });
     }
   }, [userSelected, reset]);
@@ -70,11 +74,11 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
     setIsOpen(false)
   }
 
-  const onSubmit = (data: { profile_photo: string; name: string; email: string; password: string; permissions: string[] }) => {
+  const onSubmit = (data: { profile_photo: string; name: string; email: string; password: string; permissions: permissionsAdm[] }) => {
 
 
     if (userSelected) {
-      // editUser({ setUsers: setUsersList, list: usersList, id: userSelected.id, updatedUser: formattedData });
+      editUser({ fetchData, newUser: data, id: userSelected.id });
     } else {
       addUser({ fetchData, newUser: data });
     }
@@ -153,21 +157,36 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
           />
         </div>
         <div className="w-full flex items-start justify-between">
-          <InputPassword
-            width="w-[48%]"
-            label="Senha"
-            name="password"
-            control={control}
-            placeHolder="Insira sua senha"
-            rules={{
-              required: "Campo obrigatório!",
-              minLength: {
-                value: 8,
-                message: "Mínimo 8 caracteres!",
-              },
-            }}
-            error={errors.password}
-          />
+          {userSelected ?
+            <InputPassword
+              width="w-[48%]"
+              label="Senha"
+              name="password"
+              control={control}
+              placeHolder="Insira sua senha"
+              rules={{
+                minLength: {
+                  value: 8,
+                  message: "Mínimo 8 caracteres!",
+                },
+              }}
+              error={errors.password}
+            /> :
+            <InputPassword
+              width="w-[48%]"
+              label="Senha"
+              name="password"
+              control={control}
+              placeHolder="Insira sua senha"
+              rules={{
+                required: "Campo obrigatório!",
+                minLength: {
+                  value: 8,
+                  message: "Mínimo 8 caracteres!",
+                },
+              }}
+              error={errors.password}
+            />}
           <MultiSelect
             width="w-[48%]"
             label="Permissão"
@@ -177,7 +196,7 @@ const UserModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
             rules={{
               required: "Campo obrigatório!",
             }}
-            error={errors.permissions}
+            // error={errors.permissions}
             options={permissionsOptions}
           />
         </div>
