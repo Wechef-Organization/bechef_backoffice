@@ -94,7 +94,7 @@ const Accesses = () => {
         }
       </div>
       <ActionsModal isOpen={actionsIsOpen} setIsOpen={setActionsIsOpen} />
-      <DeleteModal isOpen={deleteOpen} setIsOpen={setDeleteOpen} />
+      <DeleteModal isOpen={deleteOpen} setIsOpen={setDeleteOpen} fetchData={fetchData} />
       <UserModal isOpen={userIsOpen} setIsOpen={setUserIsOpen} fetchData={fetchData} />
     </div>
   )

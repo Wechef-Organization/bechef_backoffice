@@ -7,17 +7,23 @@ import Image from "next/image";
 import { FC, useEffect } from "react";
 import Modal from "react-modal";
 
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchData: () => Promise<void>
+}
 
-const DeleteModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
 
-  const { userSelected, usersList, setUsersList } = useAccesses()
+const DeleteModal: FC<ModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
+
+  const { userSelected } = useAccesses()
 
   useEffect(() => {
     Modal.setAppElement(document.body);
   }, []);
 
-  const handleDelete = () => {
-    deleteUser({ setUsers: setUsersList, list: usersList, id: userSelected?.id })
+  const handleDelete = async () => {
+    await deleteUser({ fetchData, id: userSelected?.id })
     setIsOpen(false)
   }
 

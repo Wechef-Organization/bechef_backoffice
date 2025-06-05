@@ -48,8 +48,14 @@ export const getAllPermissions = async ({ setPermissionsOptions }: { setPermissi
     }
 };
 
-export const deleteUser = ({ setUsers, list, id }: { setUsers: React.Dispatch<React.SetStateAction<User[]>>, list: User[], id: number | undefined }) => {
-    // setUsers(list.filter(user => user.id !== id));
+export const deleteUser = async ({ fetchData, id }: { fetchData: () => Promise<void>, id: string | undefined }) => {
+    try {
+        await api.delete(`adm/${id}`);
+        sendToast('success', 'Usuário deletado com sucesso');
+        fetchData()
+    } catch (error: any) {
+        sendToast('error', error?.response?.data?.message || 'Erro ao deletar usuário');
+    }
 }
 
 export const editUser = async ({ fetchData, newUser, id }: { fetchData: () => Promise<void>, newUser: { profile_photo: string; name: string; email: string; password: string; permissions: permissionsAdm[] }, id: string }) => {
