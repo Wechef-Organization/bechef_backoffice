@@ -20,7 +20,7 @@ export const login = async ({ email, password, setIsLoading }: Login) => {
 
 		secureLocalStorage.setItem('@ADMINTOKEN', response.data);
 	} catch (error: any) {
-		sendToast('error', error?.response?.data?.message || 'Erro desconhecido');
+		sendToast('error', error?.response?.data?.message || 'Erro ao fazer login.');
 	} finally {
 		setIsLoading(false);
 	}
