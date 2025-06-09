@@ -7,15 +7,15 @@ import ImageInput from "./ImageInput"
 const InputCategory: FC<InputCategoryProps> = ({ index, control, removeCategory }) => {
     return (
 
-        <div className="w-full flex items-end justify-between">
+        <div className="w-full flex items-end justify-between gap-2">
             <ImageInput
-                name={`categories.${index}.image`}
+                name={`categories.${index}.icon`}
                 control={control}
             />
             <InputText
                 width="w-[80%]"
                 label="Nome da categoria"
-                name={`categories.${index}.name`}
+                name={`categories.${index}.title`}
                 control={control}
                 placeHolder="Insira o nome"
                 rules={{
