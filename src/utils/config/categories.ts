@@ -2,28 +2,26 @@ import { api } from "../../../services/api";
 import { sendToast } from "../toasts";
 import { Dispatch, SetStateAction } from "react";
 import { Category } from "@/interfaces/config";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormReset, UseFormSetValue } from "react-hook-form";
 
 
-export const getCategories = async ({ setLoading, setCategoriesList, setValue }: {
-    setLoading: Dispatch<SetStateAction<boolean>>, setCategoriesList: Dispatch<React.SetStateAction<Category[]>>, setValue: UseFormSetValue<{
-        categories: Category[];
-    }>
+export const getCategories = async ({ setLoading, setCategoriesList, reset }: {
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    setCategoriesList: Dispatch<React.SetStateAction<Category[]>>,
+    reset: UseFormReset<{ categories: Category[] }>
 }) => {
     try {
         setLoading && setLoading(true);
 
         const response = await api.get(`adm/category`);
+        const categories = response.data;
 
-        setCategoriesList(response.data);
+        console.log("========================================");
+        console.log(categories);
+        console.log("========================================");
 
-        response.data.forEach((elm: Category, i: number) => {
-            setValue(`categories.${i}.id`, elm.id);
-            // setValue(`categories.${i}.image`, elm.icon);
-            setValue(`categories.${i}.icon`, "");
-            setValue(`categories.${i}.title`, elm.title);
-        });
-
+        setCategoriesList(categories);
+        reset({ categories })
     } catch (error: any) {
         sendToast('error', error?.response?.data?.message || 'Erro ao buscar categorias');
     } finally {
@@ -59,11 +57,11 @@ export const saveChanges = async ({
     setLoading,
     categoriesList,
     setCategoriesList,
-    setValue }: {
+    reset }: {
         setLoading: Dispatch<SetStateAction<boolean>>,
         categoriesList: Category[],
         setCategoriesList: Dispatch<React.SetStateAction<Category[]>>,
-        setValue: UseFormSetValue<{ categories: Category[]; }>
+        reset: UseFormReset<{ categories: Category[] }>
     }) => {
     try {
         setLoading(true);
@@ -90,12 +88,7 @@ export const saveChanges = async ({
         // Atualiza estado após persistência
         const { data: updatedCategories } = await api.get(`adm/category`);
         setCategoriesList(updatedCategories);
-
-        updatedCategories.forEach((elm: Category, i: number) => {
-            setValue(`categories.${i}.id`, elm.id);
-            setValue(`categories.${i}.icon`, elm.icon || '');
-            setValue(`categories.${i}.title`, elm.title);
-        });
+        reset({ categories: updatedCategories })
 
         sendToast('success', 'Categorias salvas com sucesso!');
     } catch (error: any) {

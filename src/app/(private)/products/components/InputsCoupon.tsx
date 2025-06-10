@@ -1,3 +1,4 @@
+import InputPercent from "@/components/InputPercent"
 import InputText from "@/components/InputText"
 import { InputsCouponProps } from "@/interfaces/InputsCoupon"
 import Image from "next/image"
@@ -32,7 +33,7 @@ const InputsCoupon: FC<InputsCouponProps> = ({ index, control, removeCoupon }) =
                 />
             </div>
             <div className="w-full pl-14">
-                <InputText
+                <InputPercent
                     width="w-[90%]"
                     label="Valor de desconto"
                     name={`coupons.${index}.value`}

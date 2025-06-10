@@ -17,7 +17,7 @@ const Categories = () => {
     const {
         control,
         handleSubmit,
-        setValue,
+        reset
     } = useForm<{ categories: Category[] }>({
         defaultValues: {
             categories: [{ id: "0", title: "", icon: "" }],
@@ -32,7 +32,7 @@ const Categories = () => {
     const onSubmit = (data: { categories: Category[] }) => {
         setCategoriesList(data.categories);
 
-        saveChanges({ setLoading, categoriesList: data.categories, setCategoriesList, setValue })
+        saveChanges({ setLoading, categoriesList: data.categories, setCategoriesList, reset })
     }
 
     const addCategory = () => {
@@ -49,7 +49,7 @@ const Categories = () => {
 
     useEffect(() => {
         const fetchCategories = async () => {
-            await getCategories({ setLoading, setCategoriesList, setValue });
+            await getCategories({ setLoading, setCategoriesList, reset });
         };
         fetchCategories();
     }, []);

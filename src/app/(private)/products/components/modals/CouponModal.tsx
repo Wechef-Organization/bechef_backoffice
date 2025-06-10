@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { FC, useEffect } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 import Modal from "react-modal";
 
 import Button from "@/components/Button";
@@ -10,68 +10,49 @@ import { Coupon } from "@/interfaces/products";
 import { getCoupons } from "@/utils/products/coupons";
 import Image from "next/image";
 import InputsCoupon from "../InputsCoupon";
+import { saveChanges } from "@/utils/products/coupons";
 
-const CouponModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
-  const { control, handleSubmit, setValue, reset } = useForm<{ coupons: Coupon[] }>({
-    defaultValues: {
-      coupons: [],
-    },
+const CouponModal: FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+  const { setCouponList } = useProducts()
+  const {
+    control,
+    handleSubmit,
+    reset
+  } =
+    useForm<{ coupons: Coupon[] }>({
+      defaultValues: {
+        coupons: [{ id: "", name: "", value: "" }],
+      },
+    });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "coupons",
   });
 
-  const { couponList, setCouponList } = useProducts()
-
   const onSubmit = (data: { coupons: Coupon[] }) => {
-    const filteredCoupons = data.coupons.filter((coupon) => coupon.name.trim() !== "");
-
-    setCouponList(filteredCoupons);
+    setCouponList(data.coupons);
+    saveChanges({ couponList: data.coupons, setCouponList, reset })
   }
 
   const addCoupon = () => {
-    const newCoupon: Coupon = {
-      id: Date.now(),
+    append({
+      id: "",
       name: "",
-      value: 0,
-    };
-
-    setCouponList((prev) => {
-      const updatedList = [...prev, newCoupon];
-
-      setValue(`coupons.${updatedList.length - 1}.name`, newCoupon.name);
-      setValue(`coupons.${updatedList.length - 1}.value`, newCoupon.value);
-
-      return updatedList;
+      value: "",
     });
   };
 
-  const removeCoupon = (index: number) => {
-    setCouponList((prev) => {
-      const updatedList = prev.filter((_, i) => i !== index);
-
-
-      setTimeout(() => {
-        reset({ coupons: updatedList });
-      }, 0);
-
-      return updatedList;
-    });
+  const removeCoupons = (index: number) => {
+    remove(index);
   };
 
 
   useEffect(() => {
-    Modal.setAppElement(document.body);
-
-    const fetchCoupons = async () => {
-      const response = await getCoupons();
-      setCouponList(response);
-
-      response.forEach((elm, i) => {
-        setValue(`coupons.${i}.id`, i);
-        setValue(`coupons.${i}.name`, elm.name);
-        setValue(`coupons.${i}.value`, elm.value);
-      });
+    const fetchCategories = async () => {
+      await getCoupons({ setCouponList, reset });
     };
-
-    fetchCoupons();
+    fetchCategories();
   }, []);
 
 
@@ -105,8 +86,8 @@ const CouponModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
           />
         </div>
         <div className="w-full h-[390px] py-5 flex flex-col gap-5 overflow-y-auto">
-          {couponList.length > 0 && couponList.map((elm, i) => (
-            <InputsCoupon control={control} index={i} key={`${elm.id}-${i}`} removeCoupon={removeCoupon} />
+          {fields.map((elm, i) => (
+            <InputsCoupon control={control} index={i} key={`${elm.id}-${i}`} removeCoupon={removeCoupons} />
           ))}
         </div>
         <div className="flex items-center gap-2 cursor-pointer" onClick={addCoupon}>

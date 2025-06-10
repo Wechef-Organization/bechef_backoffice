@@ -11,7 +11,7 @@ export interface Product {
 };
 
 export interface Coupon {
-    id: number,
+    id: string,
     name: string,
-    value: number,
+    value: string,
 }
