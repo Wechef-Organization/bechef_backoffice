@@ -11,9 +11,10 @@ interface GetAllClientsParams {
     orderBy?: string;
     sortBy?: 'ASC' | 'DESC';
     approved?: string
+    req_approved?: string
 }
 
-export const getAllUsers = async ({ setLoading, setUsersList, search, page, setOrdersCount, orderBy, sortBy, approved }: GetAllClientsParams) => {
+export const getAllUsers = async ({ setLoading, setUsersList, search, page, setOrdersCount, orderBy, sortBy, approved, req_approved }: GetAllClientsParams) => {
     try {
         setLoading && setLoading(true);
 
@@ -24,6 +25,7 @@ export const getAllUsers = async ({ setLoading, setUsersList, search, page, setO
         if (orderBy) queryParams.append('order', orderBy);
         if (sortBy) queryParams.append('sortBy', sortBy);
         if (approved) queryParams.append('approved', approved);
+        if (req_approved) queryParams.append('req_approved', req_approved);
 
         const response = await api.get(`adm/users?${queryParams.toString()}`);
 

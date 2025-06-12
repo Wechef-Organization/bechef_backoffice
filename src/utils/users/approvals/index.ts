@@ -22,7 +22,7 @@ export const rejectUser = async ({ id, type, fetchData }: ApproveUserProps) => {
     try {
         await api.patch(`adm/users/reject`, { id, type });
         await fetchData()
-        sendToast('success', 'Usuário recusado com sucesso! .');
+        sendToast('success', 'Usuário recusado com sucesso!');
 
     } catch (error: any) {
         sendToast('error', error?.response?.data?.message || 'Erro ao recusar usuário.');

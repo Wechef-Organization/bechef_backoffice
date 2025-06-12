@@ -34,7 +34,6 @@ const Users = () => {
         setOrdersCount,
         orderBy,
         sortBy,
-        approved: "true"
       });
     }
     if (switchSelected == "influencers") {
