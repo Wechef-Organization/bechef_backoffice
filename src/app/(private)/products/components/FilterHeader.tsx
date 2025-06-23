@@ -9,7 +9,7 @@ import Select from "@/components/Select";
 import { useProducts } from "@/context/ProductsContext";
 import optionsSelect from "@/mock/Requests/optionsSelect";
 
-const FilterHeader = () => {
+const FilterHeader = ({ fetchData }: { fetchData: () => Promise<void> }) => {
     const {
         handleSubmit,
         control,
@@ -42,7 +42,13 @@ const FilterHeader = () => {
                     required: "Campo obrigatório!",
                 }}
             />
-            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} />
+            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        fetchData();
+                    }
+                }}
+            />
             <Image
                 src={"/images/Global/filter.svg"}
                 alt="Icone de filtro"

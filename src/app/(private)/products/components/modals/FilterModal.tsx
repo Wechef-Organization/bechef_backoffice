@@ -1,14 +1,33 @@
 "use client"
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 
 import Button from "@/components/Button";
 import Select from "@/components/Select";
 import { useProducts } from "@/context/ProductsContext";
+import { getFilterOptions } from "@/utils/products/products";
 
-const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+interface FilterFormData {
+  select_profit: string;
+  select_category: string;
+  select_status: string;
+}
+
+interface FilterParams {
+  profitFilter?: string;
+  categoryFilter?: string;
+  statusFilter?: string;
+}
+
+interface FilterModalProps extends ModalProps {
+  fetchData: (filters?: FilterParams) => Promise<void>;
+}
+
+const FilterModal: React.FC<FilterModalProps> = ({ isOpen, setIsOpen, fetchData }) => {
+  const { setProfitFilter, setCategoryFilter, setStatusFilter } = useProducts()
+
   const {
     handleSubmit,
     control,
@@ -22,73 +41,47 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
     }
   });
 
-  const { setProfitFilter, setCategoryFilter, setStatusFilter } = useProducts()
+  const [profitOptions, setProfitOptions] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([
+    { value: "true", name: "Ligado" },
+    { value: "false", name: "Desligado" },
+  ]);
 
-
-  const optionsSelect = [
-    {
-      value: "rota",
-      name: "Em rota de entrega",
-    },
-    {
-      value: "entrege",
-      name: "Entrege",
-    },
-  ];
-
-  const optionsCategory = [
-    {
-      value: "Proteína",
-      name: "Proteína",
-    },
-    {
-      value: "Massas",
-      name: "Massas",
-    },
-  ];
-
-  const optionsStatus = [
-    {
-      value: "true",
-      name: "Ligado",
-    },
-    {
-      value: "false",
-      name: "Desligado",
-    },
-  ];
-
-
-  const clearFilter = () => {
+  const clearFilter = async () => {
     setProfitFilter("")
     setCategoryFilter("")
     setStatusFilter("")
     reset()
     setIsOpen(false)
+    await fetchData({
+      profitFilter: "",
+      categoryFilter: "",
+      statusFilter: "",
+    })
   }
 
-  const onSubmit = (data: {
-    select_profit: string,
-    select_category: string,
-    select_status: string,
-  }) => {
-    if (data.select_profit != "") {
-      setProfitFilter(data.select_profit)
-    }
-    if (data.select_category != "") {
-      setCategoryFilter(data.select_category)
-    }
-    if (data.select_status != "") {
-      setStatusFilter(data.select_status)
-    }
-
-    setIsOpen(false)
-  }
+  const onSubmit = async (data: FilterFormData) => {
+    setProfitFilter(data.select_profit);
+    setCategoryFilter(data.select_category);
+    setStatusFilter(data.select_status);
+    setIsOpen(false);
+    await fetchData({
+      profitFilter: data.select_profit,
+      categoryFilter: data.select_category,
+      statusFilter: data.select_status,
+    });
+  };
 
   useEffect(() => {
     Modal.setAppElement(document.body);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      getFilterOptions({ setCategoryOptions, setProfitOptions });
+    }
+  }, [isOpen]);
   return (
     <Modal
       isOpen={isOpen}
@@ -114,7 +107,7 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             selectStyle="rounded-lg"
             label="Lucro por venda"
             name="select_profit"
-            options={optionsSelect}
+            options={profitOptions}
             control={control}
             error={errors}
             notMargin
@@ -124,7 +117,7 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             selectStyle="rounded-lg"
             label="Categoria"
             name="select_category"
-            options={optionsCategory}
+            options={categoryOptions}
             control={control}
             error={errors}
             notMargin
@@ -134,7 +127,7 @@ const FilterModal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
             selectStyle="rounded-lg"
             label="Status"
             name="select_status"
-            options={optionsStatus}
+            options={statusOptions}
             control={control}
             error={errors}
             notMargin

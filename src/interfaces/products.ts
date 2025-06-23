@@ -1,13 +1,13 @@
 export interface Product {
     id: number,
-    image: string,
+    photo: string,
     name: string,
     category: string,
-    mark: string,
+    brand: string,
     stock: number,
     value: number,
-    profit: number,
-    status: boolean,
+    sales_profit: number,
+    product_status: boolean,
 };
 
 export interface Coupon {

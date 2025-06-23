@@ -12,11 +12,12 @@ const FilterHeader = ({ fetchData }: { fetchData: () => Promise<void> }) => {
 
     return (
         <div className="flex items-center gap-3">
-            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue} onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                    fetchData();
-                }
-            }} />
+            <InputSearch width="w-80" heigth="h-11" value={searchValue} setValue={setSearchValue}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        fetchData();
+                    }
+                }} />
             <Link href={"/users/approvals"}>
                 <Image
                     src={"/images/Users/check.svg"}
